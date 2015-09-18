@@ -4,9 +4,12 @@ function addGroup(ev) {
   if(!name) {
     return;
   }
-  var $newBlock = $($('#group-block-tpl').html());
-  $newBlock.find('.group-name').val(name);
-  $newBlock.appendTo($(ev.target).parents('.js--group-mapping').find('.groups'));
+  $(ev.target)
+    .parents('.js--group-mapping')
+    .find('.groups')
+    .append(buildGroupElement({
+      name: name
+    }));
 }
 
 // Add field to group
@@ -15,9 +18,13 @@ function addGroupField(ev) {
   if(!name) {
     return;
   }
-  var $newBlock = $($('#groupField-block-tpl').html());
-  $newBlock.find('.field-name').val(name);
-  $newBlock.appendTo($(ev.target).parents('.group').find('.groupFields'));
+
+  $(ev.target)
+    .parents('.group')
+    .find('.groupFields')
+    .append(buildFieldElement({
+      name: name
+    }));
 }
 
 // Remove field from group
@@ -46,16 +53,17 @@ function editFieldName(ev) {
 
 // Add resource to group field
 function addFieldResource(ev) {
-  var $fieldBlock = $(ev.target).parents('.group-field');
-  $.get(CONFIG.RESOURCES_URL).then(function(resources) {
-    var html = '';
-    resources.sort().forEach(function(item) {
-      html += '<option>' + item + '</option>\n'
-    });
-    var $newBlock = $($('#resource-block-tpl').html());
-    $newBlock.find('.resources-list').append($(html));
-    $newBlock.appendTo($fieldBlock.find('.group-resources'));
-  });
+  var name = $.trim(prompt('Enter field name:'));
+  if(!name) {
+    return;
+  }
+
+  $(ev.target)
+    .parents('.group-field')
+    .find('.group-resources')
+    .append(buildResourceElement({
+      name: name
+    }));
 }
 
 // Update resource fields
@@ -63,15 +71,15 @@ function updateResourceFields(ev) {
   var resource = $(ev.target).val();
   var $resourceBlock = $(ev.target).parents('.resource');
   var url = CONFIG.RESOURCE_FIELDS_URL.replace('{{resource}}', resource);
-  $.get(url).then(function(fields) {
+  return getApiData(url).then(function(fields) {
     var html = '';
     fields.sort().forEach(function(item) {
       html += "<li><label><input type=\"checkbox\" value=\""+ item + "\"/>" + item + "</label></li>";
     });
 
     $resourceBlock
-      .find('.js--read-fields, .js--update-fields').html(html)
-      .parents('.input-group.hidden').removeClass('hidden');
+      .find('.js--read-fields,.js--update-fields').html(html);
+    $resourceBlock.find('.input-group.hidden').removeClass('hidden');
   });
 }
 
@@ -84,11 +92,22 @@ function removeResource(ev) {
 
 // send group settings to server
 function saveMapping() {
+  localStorage.setItem('mapping', JSON.stringify(getFormData()));
+  return;
   $.ajax({
     method: "POST",
     url: CONFIG.SAVE_MAPPING_URL,
     data: JSON.stringify(getFormData())
   }).then(function(){
-    aler('Saved');
+    alert('Saved');
   })
+}
+
+// send group settings to server
+function restoreMapping() {
+  var mappingData = {};
+  try {
+    mappingData = JSON.parse(localStorage.getItem('mapping'));
+  } catch (e) {};
+  buildFormByData(mappingData);
 }

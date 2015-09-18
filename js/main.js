@@ -15,3 +15,5 @@ $(document.body).on('click', '.js--save-mapping', saveMapping);
 $(document.body).on('click', '.js--add-group', addGroup);
 
 $(document.body).on('click', '.js--remove-group', removeGroup);
+
+$(document.body).on('click', '.js--restore-mapping', restoreMapping);
