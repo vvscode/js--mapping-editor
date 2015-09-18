@@ -23,14 +23,18 @@ ul.checkbox li{
     width: 100%;
 }
 
-select {
-    width: 100%;
+select.resources-list {
+    width: 80%;
 }
 
-input.field-name {
+input.field-name, input.group-name {
     pointer-events: none;
     background-color: #d9edf7;
     border: none;
+}
+
+input.group-name{
+    background-color: #337ab7;
 }
 
 .form-btns {
@@ -41,4 +45,8 @@ input.field-name {
 
 .form-btns .btn {
     float: right;
+}
+
+.group {
+    border: 1px solid #337ab7;
 }

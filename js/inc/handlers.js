@@ -1,18 +1,36 @@
 // Add field to group
-function addGroupField() {
+function addGroup(ev) {
+  var name = $.trim(prompt('Enter group name:'));
+  if(!name) {
+    return;
+  }
+  var $newBlock = $($('#group-block-tpl').html());
+  $newBlock.find('.group-name').val(name);
+  $newBlock.appendTo($(ev.target).parents('.js--group-mapping').find('.groups'));
+}
+
+// Add field to group
+function addGroupField(ev) {
   var name = $.trim(prompt('Enter field name:'));
   if(!name) {
     return;
   }
   var $newBlock = $($('#groupField-block-tpl').html());
   $newBlock.find('.field-name').val(name);
-  $newBlock.appendTo($('.groupFields'));
+  $newBlock.appendTo($(ev.target).parents('.group').find('.groupFields'));
 }
 
 // Remove field from group
 function removeGroupField(ev) {
   if(confirm('Are you sure?')){
     $(ev.target).parents('.group-field').remove();
+  }
+}
+
+// Remove field from group
+function removeGroup(ev) {
+  if(confirm('Are you sure?')){
+    $(ev.target).parents('.group').remove();
   }
 }
 
@@ -55,4 +73,16 @@ function updateResourceFields(ev) {
       .find('.js--read-fields, .js--update-fields').html(html)
       .parents('.input-group.hidden').removeClass('hidden');
   });
+}
+
+// Remove resource
+function removeResource(ev) {
+  if(confirm("Are you sure?")) {
+    $(ev.target).parents('.resource').remove();
+  }
+}
+
+// send group settings to server
+function saveMapping() {
+  alert('Save mapping!');
 }
