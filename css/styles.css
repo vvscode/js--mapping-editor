@@ -1,0 +1,44 @@
+body {
+    padding-top: 75px;
+}
+
+ul.checkbox {
+    list-style: none;
+    height: 60px;
+    overflow: auto;
+    border: 1px solid gray;
+}
+
+ul.checkbox li{
+    display: inline-block;
+    width: 150px;
+}
+
+.resource {
+    border: 1px solid lightgray;
+    margin-bottom: 5px;
+}
+
+.input-group {
+    width: 100%;
+}
+
+select {
+    width: 100%;
+}
+
+input.field-name {
+    pointer-events: none;
+    background-color: #d9edf7;
+    border: none;
+}
+
+.form-btns {
+    width: 100%;
+    text-align: right;
+    padding: 5px;
+}
+
+.form-btns .btn {
+    float: right;
+}
