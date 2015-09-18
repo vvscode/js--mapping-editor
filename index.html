@@ -62,6 +62,7 @@
 
 <script src="js/inc/mappingObject.js"></script>
 <script src="js/inc/handlers.js"></script>
+<script src="js/config.js"></script>
 <script src="js/main.js"></script>
 
 <script type="html/template" id="groupField-block-tpl">
@@ -75,7 +76,7 @@
                 <button type="button" class="btn btn-default btn-xs pull-right js--edit-field-name">
                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Edit field name
                 </button>
-                <button type="button" class="btn btn-default btn-xs  pull-right">
+                <button type="button" class="btn btn-default btn-xs  pull-right js--add-field-resource">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add resource
                 </button>
             </div>
@@ -132,26 +133,26 @@
             <label class="col-md-2">Resouce name:</label>
 
             <div class="col-md-10">
-                <select required="true">
+                <select required="true" class="resources-list js--resource">
                     <option disabled selected>Select resource</option>
                 </select>
             </div>
         </div>
-        <div class="input-group" data-content="resource-read">
+        <div class="input-group hidden" data-content="resource-read">
             <label class="col-md-2">Read fields:</label>
 
             <div class="col-md-10">
-                <ul class="checkbox">
+                <ul class="checkbox js--read-fields">
                     <!--<li><label><input type="checkbox" value="route1"/>Field 1 for-->
                         <!--Resouce</label></li>-->
                 </ul>
             </div>
         </div>
-        <div class="input-group" data-content="resource-update">
+        <div class="input-group hidden" data-content="resource-update">
             <label class="col-md-2">Update fields:</label>
 
             <div class="col-md-10">
-                <ul class="checkbox">
+                <ul class="checkbox js--update-fields">
                     <!--<li><label><input type="checkbox" value="route1"/>Field 1 for-->
                         <!--Resouce</label></li>-->
                 </ul>
