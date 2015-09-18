@@ -84,5 +84,11 @@ function removeResource(ev) {
 
 // send group settings to server
 function saveMapping() {
-  alert('Save mapping!');
+  $.ajax({
+    method: "POST",
+    url: CONFIG.SAVE_MAPPING_URL,
+    data: JSON.stringify(getFormData())
+  }).then(function(){
+    aler('Saved');
+  })
 }
