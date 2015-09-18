@@ -53,17 +53,10 @@ function editFieldName(ev) {
 
 // Add resource to group field
 function addFieldResource(ev) {
-  var name = $.trim(prompt('Enter field name:'));
-  if(!name) {
-    return;
-  }
-
   $(ev.target)
     .parents('.group-field')
     .find('.group-resources')
-    .append(buildResourceElement({
-      name: name
-    }));
+    .append(buildResourceElement());
 }
 
 // Update resource fields
